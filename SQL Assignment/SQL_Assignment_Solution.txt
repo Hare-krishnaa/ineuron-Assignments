@@ -28,4 +28,5 @@ Ans - 16 ---> select distinct city from station_table where city not like "A%" a
 
 Ans - 17 ---> select P.product_name from Product as P inner join Sale as S on P.product_id = S.product_id GROUP BY S.product_id HAVING MIN(sale_date) >= '2019-01-01' AND               MAX(sale_date) <= '2019-03-31';
 
-Ans - 18 ---> 
+Ans - 18 ---> select author_id from views groupby author_id having author_id = viewed_id;
+              select distinct author_id from views where author_id = viewed-id;
