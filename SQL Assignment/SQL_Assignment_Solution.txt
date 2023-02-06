@@ -24,4 +24,8 @@ Ans - 14 ---> select distinct city from station_table where city not like "%a" o
 Ans - 15 ---> select distinct city from station_table where city not like "A%" or city not like "E%" or city not like "I%" or city not like "O%" or city not like "U%"
             or select distinct city from station_table where city not like "%a" or city not like "%e" or city not like "%i" or city not like "%o" or city not like "%u";
             
-Ans - 16 --->         
+Ans - 16 ---> select distinct city from station_table where city not like "A%" and city not like "E%" and city not like "I%" and city not like "O%" and city not like                   "U%" and city not like "%a" and city not like "%e" and city not like "%i" and city not like "%o" and city not like "%u";
+
+Ans - 17 ---> select P.product_name from Product as P inner join Sale as S on P.product_id = S.product_id GROUP BY S.product_id HAVING MIN(sale_date) >= '2019-01-01' AND               MAX(sale_date) <= '2019-03-31';
+
+Ans - 18 ---> 
