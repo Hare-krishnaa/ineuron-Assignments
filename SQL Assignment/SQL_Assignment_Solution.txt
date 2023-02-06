@@ -11,4 +11,17 @@ Ans - 8 ---> select distinct city, id from station_table where mod(id,2) = 0
 Ans - 9 ---> total_records = select count(city) from station_table
              total_unique_records = select count(distinct city) from station_table
              differece = total_records-total_unique_records
-Ans -10 --->             
+Ans -10 ---> select top 1 city, len(city) from station order by len(city) ASC, city ASC; 
+             select top 1 city, len(city) from station order by len(city) DESC, city ASC;
+Ans - 11 ---> select distinct city from station_table where city like "A%" or city like "E%" or city like "I%" or city like "O%" or city like "U%";
+
+Ans - 12 ---> select distinct city from station_table where city like "%a" or city like "%e" or city like "%i" or city like "%o" or city like "%u";
+
+Ans - 13 ---> select distinct city from station_table where city not like "A%" or city not like "E%" or city not like "I%" or city not like "O%" or city not like "U%";
+
+Ans - 14 ---> select distinct city from station_table where city not like "%a" or city not like "%e" or city not like "%i" or city not like "%o" or city not like "%u";
+
+Ans - 15 ---> select distinct city from station_table where city not like "A%" or city not like "E%" or city not like "I%" or city not like "O%" or city not like "U%"
+            or select distinct city from station_table where city not like "%a" or city not like "%e" or city not like "%i" or city not like "%o" or city not like "%u";
+            
+Ans - 16 --->         
