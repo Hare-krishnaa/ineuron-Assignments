@@ -1,1 +1,14 @@
+All SQL Queries Answers down below.
 
+Ans - 1 ---> select * from city_table where countrycode = "USA" and population > 100000
+Ans - 2 ---> select name from city_table where countrycode = "USA" and population > 120000
+Ans - 3 ---> select * from city_table
+Ans - 4 ---> select * from city_table where id  = 1661
+Ans - 5 ---> select * from city_table where countrycode = "JPN"
+Ans - 6 ---> select name from city_table where countrycode = "JPN"
+Ans - 7 ---> select city, state from station_table
+Ans - 8 ---> select distinct city, id from station_table where mod(id,2) = 0
+Ans - 9 ---> total_records = select count(city) from station_table
+             total_unique_records = select count(distinct city) from station_table
+             differece = total_records-total_unique_records
+Ans -10 --->             
