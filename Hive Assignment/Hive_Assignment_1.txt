@@ -1,5 +1,8 @@
 Perform below menioned queries on "sales_order_orc" table :
 
 
-Q-a Calculatye total sales per year?
+Q-a. Calculatye total sales per year?
 Ans- select year_id, sum(sales) as total_sales from sales_order_orc group by year_id; 
+
+Q-b. Find a product for which maximum orders were placed?
+Ans- select productline, max(quantityordered) from sales_order_orc group by productline order by max(quantityordered) desc limit 1;
