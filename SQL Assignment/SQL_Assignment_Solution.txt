@@ -30,3 +30,4 @@ Ans - 17 ---> select P.product_name from Product as P inner join Sale as S on P.
 
 Ans - 18 ---> select author_id from views groupby author_id having author_id = viewed_id;
               select distinct author_id from views where author_id = viewed-id;
+Ans - 19 ---> 
