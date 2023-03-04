@@ -47,9 +47,7 @@ Ans - 19 ---> select ifnull(
     , 0
 ) as immediate_percentage from Delivery;
 
-Ans - 20 ---> 
-
-Ans - 21 ---> select distinct ad_id, ifnull(
+Ans - 20 ---> select distinct ad_id, ifnull(
         round(
             sum(action = 'Clicked') / (sum(action = 'Clicked') + sum(action = 'Viewed')) * 100, 2
         ) , 0
@@ -58,4 +56,4 @@ Ans - 21 ---> select distinct ad_id, ifnull(
     group by ad_id
     order by ctr desc, ad_id;
     
-Ans - 22 --->
+Ans - 21 --->
