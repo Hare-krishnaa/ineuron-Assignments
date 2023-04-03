@@ -56,4 +56,159 @@ Ans - 20 ---> select distinct ad_id, ifnull(
     group by ad_id
     order by ctr desc, ad_id;
     
-Ans - 21 --->
+Ans - 21 ---> select
+	            employee_id,
+	            count(team_size) over (Partition By team_id) as team_size from
+              employee;
+
+Ans - 22---> select 
+	           c.country_name,
+             case when avg(w.weather_state) <= 15 then "Cold"
+                 when avg(w.weather_state)  >= 25 then "Hot"
+                 else "Warm"
+            end as weather_type
+
+            from countries as c
+            inner join weather as w on c.country_id = w.country_id
+            where w.day between 2019-11-01 and 2019-11-30
+            group by w.country_id
+
+Ans-23---> select product_id, ifnull(round(sum(prices_sum) / sum(units), 2), 0) as average_price
+           from (
+                     select p.product_id as product_id, units, price * units as prices_sum
+                     from Prices p left join UnitsSold u
+                     on p.product_id = u.product_id and purchase_date between start_date and end_date
+            ) as temp
+            group by product_id;
+
+Ans-24---> select distinct player_id, event_date as first_login
+	         from activity
+	         order by player_id, event_date limit 1
+
+           or
+           
+          SELECT
+          player_id,
+          device_id
+          FROM Activity
+          WHERE (player_id, event_date) IN (SELECT
+                                        player_id,
+                                        MIN(event_date) 
+                                    FROM Activity 
+                                    GROUP BY player_id)
+
+25.select 
+	player_id,
+	device_id
+   from (select player_id, min(event_date) as login_date from activity group by player_id) as tmp
+where event_date = login_date
+
+SELECT
+	player_id,
+	device_id
+FROM (
+	 SELECT 
+	 	player_id,
+	 	device_id,
+	 	event_date,
+	 	MIN(event_date) OVER(PARTITION BY player_id ORDER BY event_date) as first_login
+	 FROM Activity
+ 	) t1
+ WHERE event_date = first_login
+
+26. select 
+	p.product_name, 
+	tmp.units
+    from (
+    select 
+	product_id, 
+	sum(unit) as unit 
+    from orders 
+    where order_date between 2020-02-01 and 2020-02-28 
+    group by product_id 
+    having sum(unit) >= 100 
+	) as tmp
+    inner join products as p 
+    on tmp.product_id = p.product_id
+
+27.select * from Users
+    where mail regexp '^[a-zA-Z]+[a-zA-Z0-9_\\./\\-]{0,}@leetcode.com$'
+    order by user_id;
+
+28.select customer_id, name
+from
+(
+    select o.customer_id, c.name,
+        sum(case when left(o.order_date,7) = '2020-06' then p.price * o.quantity end) as JuneSpend,
+        sum(case when left(o.order_date,7) = '2020-07' then p.price * o.quantity end) as JulySpend
+    from Orders o
+    left join Customers c on o.customer_id = c.customer_id
+    left join Product p on o.product_id = p.product_id
+    group by o.customer_id
+    having JuneSpend >= 100 and JulySpend >= 100
+) as temp
+
+29.select c.title
+from tvprogram t
+inner join content c
+on t.content_id = c.content_id
+where c.kids_content = 'Y' and c.content_type = 'Movies' and left(t.program_date,7) = '2020-06'
+
+30.select Queries.id, Queries.year, ifnull(npv, 0) as npv
+    from Queries left join NPV
+    on Queries.id = NPV.id and Queries.year = NPV.year
+    order by Queries.id;
+
+31. duplicate question
+
+32.select ifnull(unique_id, null) as uniqueID, Employees.name
+	from Employees left join EmployeeUNI
+	on Employees.id = EmployeeUNI.id;
+
+33. select u.name, ifnull(sum(r.distance),0) as travelled_distance
+	from users as u left join rides as r
+	on u.id = r.user_id
+	group by u.name
+	order by travelled_distance desc, u.name asc;
+
+34. select p.product_name, sum(o.units) as total
+	from orders as o left join products as p
+	on o.product_id = p.product_id
+	where o.order_date like "2020-02"
+	group by o.product_id
+	having total >= 100;
+
+35. (select u.name
+      from users u
+      join moviesRating m on u.user_id = m.user_id
+      group by m.user_id
+      order by count(*) desc, u.name asc
+      limit 1
+)
+union
+(
+      select m.monvie_name
+      from movieRating mr
+      inner join movies m on mr.movie_id = m.movie_id
+     where left(created_at, 7) = "2020-02"
+     group by mr.movie_id 
+     order by avr(rating) desc, m.movie_name asc
+     limit 1
+ )    
+
+36. 
+select  u.name, ifnull(sum(r.distance),0) as distance-travelled
+from rides r
+right join user u on r.user_id = u.user_id
+group by r.user_id
+order by distance_traveled desc, u.name asc
+
+37.
+select ifnull(eu.unique_id,null) as unique_id, e.name
+from employee e
+left join employeeUNI eu on e.id = eu.id
+
+38.
+select id, name
+from student
+where department_id not in (select id from department)
